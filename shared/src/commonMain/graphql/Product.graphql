@@ -1,0 +1,41 @@
+fragment SubProduct on SubProduct {
+    id
+    name
+    includedInBox
+    quantity
+    virtualFreeWithPromotions {
+        ...VirtualFreeWithPromotions
+    }
+}
+
+fragment VirtualFreeWithPromotions on VirtualFreeWithPromotion {
+    fullName
+    price
+    productId
+}
+
+fragment ProductReviewSummary on ReviewMetaData {
+    averageRating
+    count
+    reviewAveragePerCategory {
+        averageRating
+        name
+    }
+    reviewCountPerRating {
+        count
+        stars
+    }
+}
+
+fragment ProductReview on Review {
+        authorName
+        cons
+        createdAt
+        id
+        pros
+        ratingAverage
+        text
+        title
+        translatedFrom
+}
+

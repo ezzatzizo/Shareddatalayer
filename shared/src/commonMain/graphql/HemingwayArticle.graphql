@@ -1,0 +1,16 @@
+fragment HemingwayArticle on HemingwayArticle {
+    id
+    type
+    title
+    blocks{
+        ...TextImageBlocks
+        ...HeaderBlocks
+        ...TextBlocks
+        ...TextImageXBlocks
+        ...SpecialistFooterBlocks
+        ...TextVideoBlocks
+        ...ImageXEntranceBlock
+        ...PillsBlock
+        ...FaqBlock
+    }
+}

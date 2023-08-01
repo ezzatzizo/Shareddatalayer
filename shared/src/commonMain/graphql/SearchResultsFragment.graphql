@@ -1,0 +1,108 @@
+fragment SearchResultsFragment on SearchResults {
+    redirectedPath
+    resultCount
+    pageCount
+    currentPage
+    pageSize
+    products {
+        id
+        name
+        salesPrice {
+            includingVat
+        }
+        availabilityState
+        primaryImage {
+            id
+            ...HighAndLowImage
+        }
+        canBeDeliveredNextDay
+        isComposed
+        reviewMetadata {
+            averageRating
+            count
+        }
+        highlights
+        availableForPickupAtStores
+        listPrice {
+            includingVat
+        }
+        productType {
+            id
+        }
+        energyLabel {
+            image {
+                id
+                extendedEnergyLabelImage:cdnUrl(width: 300, height: 600, max: true, transparent: true)
+            }
+            shortText
+            specification {
+                absoluteUrl
+            }
+        }
+        coolbluesChoice {
+            title
+        }
+        dynamicHighlights {
+            key
+            values
+        }
+        primaryPromoIcon {
+            ... on SearchLegacyPromoIcon {
+                type,
+                text,
+                imageId
+            }
+        }
+        secondaryPromoIcon {
+            ... on SearchLegacyPromoIcon {
+                type,
+                text,
+                imageId
+            }
+        }
+        productLabel {
+            type,
+            text,
+            image {
+                id
+                productLabelImage:cdnUrl(width: 100, height: 100, max: true, transparent: true)
+            }
+        }
+        deliveryProposition(postalCode: $postalCode) {
+            ... on DeliveryProposition {
+                hasFreeDelivery
+            }
+        }
+    }
+    facets {
+        ... on ValueFacet {
+            displayName
+            trackingValue
+            values {
+                name
+                displayName
+                value
+                count
+                isSelected
+                trackingValue
+            }
+            propertyExplanationMetaData {
+                productTypeId
+                propertyId
+            }
+        }
+        ... on RangeFacet {
+            displayName
+            name
+            trackingValue
+            minValue
+            maxValue
+            selectedLowerBound
+            selectedUpperBound
+            propertyExplanationMetaData {
+                productTypeId
+                propertyId
+            }
+        }
+    }
+}

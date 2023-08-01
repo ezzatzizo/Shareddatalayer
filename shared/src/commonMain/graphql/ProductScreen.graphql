@@ -1,0 +1,134 @@
+# This is querying only active Draw for a product now,
+# but will be use to query other informations from product in the future
+query ProductScreen($id: ID!, $postalCode: String, $shouldAddProductCollection: Boolean!, $isUserLoggedIn: Boolean!) {
+    product(id: $id) {
+        id
+        activeDraw {
+            id
+            description
+            fact
+            slogan
+            rulesLink
+            rulesLinkText
+        }
+
+        images {
+            id
+            thumbnail:cdnUrl(width: 200, height: 500)
+            full:cdnUrl(width: 1024, height: 768)
+        }
+        youtubeVideos {
+            id
+            thumbnail: image {
+                id
+                cdnUrl(width: 200, height: 500)
+            }
+            full: image {
+                id
+                cdnUrl(width: 1024, height: 768)
+            }
+        }
+        productType {
+            image {
+                cdnUrl(width: 80 height: 80)
+                id
+            }
+        }
+        deliveryProposition(postalCode: $postalCode){
+            ... on DeliveryProposition{
+                cutOff
+                deliveryDate
+                hasFreeDelivery
+                hasNextDayDelivery
+                hasRestrictionsForLocation
+            }
+        }
+        availabilityState
+        energyLabel {
+            short
+            image {
+                cdnUrl(width: 300, height: 600)
+            }
+            specification {
+                absoluteUrl
+            }
+        }
+
+        collection @include(if: $shouldAddProductCollection) {
+            selectedDiscriminantValues {
+                label
+                isSelected
+                productId
+                image {
+                    ...Image
+                }
+            }
+        }
+        coolbluesChoice {
+            content {
+                title
+                explanation
+                explanationBullets
+                type
+                specialist {
+                    image {
+                        ...Image
+                    }
+                }
+            }
+        }
+        subscription {
+            installmentAmount
+            minimumDurationMonths
+            oneTimePaymentAmount
+        }
+        secondChanceProductMetadata {
+            id
+            salesPrice {
+                includingVat
+            }
+        }
+        includedInBox
+        manual {
+            manualUrl
+        }
+        virtualFreeWithPromotions {
+          ...VirtualFreeWithPromotions
+        }
+        subProducts {
+            ...SubProduct
+        }
+        reviewMetaData {
+            ...ProductReviewSummary
+        }
+        reviewCollection {
+            ...ProductReview
+        }
+    }
+    me @include(if: $isUserLoggedIn) {
+        enrolledProductDraws {
+            id
+        }
+    }
+}
+
+query HasSupportArticles($id: ID!) {
+    product(id: $id) {
+        hasProductSupportHub
+        supportContent {
+            highlightedArticles {
+                id
+            }
+        }
+    }
+}
+
+query ProductAccessorySearchHeader($id: ID!) {
+    productHeader: product(id: $id) {
+        name,
+        primaryImage {
+            id
+            ...HighAndLowImage
+        }
+    }
+}
