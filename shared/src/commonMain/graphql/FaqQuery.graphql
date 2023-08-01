@@ -1,0 +1,11 @@
+#Used exclusively for the energy for now, since we don't need to use an entire page.
+query FaqQuery($url: Uri!) {
+    deepLinkResult(url: $url) {
+        ... on HemingwayArticle{
+            id
+            blocks {
+                ...FaqBlock
+            }
+        }
+    }
+}

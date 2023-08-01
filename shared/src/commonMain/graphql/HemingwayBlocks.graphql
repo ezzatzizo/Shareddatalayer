@@ -1,0 +1,128 @@
+fragment TextImageBlocks on TextImageBlock {
+    content
+    image {
+        ...Image
+    }
+    title
+    callToAction {
+        ...HemingwaySitemapCtas
+        ...HemingwayExternalCtas
+    }
+}
+
+fragment HeaderBlocks on HeaderBlock {
+    title
+    description
+    image {
+        ...Image
+    }
+    headerAuthor:author
+    lastModified
+}
+
+fragment TextBlocks on TextBlock {
+    title
+    content
+    callToAction {
+        ...HemingwaySitemapCtas
+        ...HemingwayExternalCtas
+    }
+}
+
+fragment TextImageXBlocks on TextImageXBlock {
+    title
+    textImages {
+        ...TextImageBlocks
+    }
+}
+
+fragment HemingwaySitemapCtas on HemingwaySitemapCta {
+    title
+    url
+    ctaType
+    presentationFormat
+}
+
+# The main difference between this an sitemaps is how the backend get those links, the app show both in the same component
+fragment HemingwayExternalCtas on HemingwayExternalCta {
+    title
+    url
+    ctaType
+}
+
+fragment SpecialistFooterBlocks on SpecialistFooterBlock {
+    specialistCategory
+    authorImage: image {
+        ...Image
+    }
+    author
+    links {
+        ...HemingwaySitemapCtas
+    }
+}
+
+
+fragment TextVideoBlocks on TextVideoBlock {
+    youtubeId
+    title
+    content
+    callToAction {
+        ...HemingwaySitemapCtas
+    }
+}
+
+fragment ImageXEntranceBlock on ImageXEntranceBlock {
+    callToAction {
+        ...HemingwaySitemapCtas
+        ...HemingwayExternalCtas
+    }
+    entrances {
+        ...ImageEntrance
+    }
+    factSlogan {
+        fact
+        slogan
+    }
+    image {
+        cdnUrl(width: 400, height: 400, max: true, transparent: true)
+    }
+    title
+}
+
+fragment ImageEntrance on Entrance {
+    callToAction {
+        ...HemingwaySitemapCtas
+        ...HemingwayExternalCtas
+    }
+    description
+    image {
+       ...Image
+    }
+}
+
+fragment PillsBlock on PillsBlock {
+    title
+    entrances {
+        ...PillsEntrance
+    }
+}
+
+fragment PillsEntrance on Entrance {
+    callToAction {
+        ...HemingwaySitemapCtas
+        ...HemingwayExternalCtas
+    }
+    description
+    image {
+        ...Image
+    }
+}
+
+fragment FaqBlock on FaqBlock {
+    title
+    questionsAndAnswers {
+        question
+        answer
+    }
+}
+

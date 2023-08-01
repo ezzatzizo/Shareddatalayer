@@ -1,0 +1,28 @@
+query GetPropertyExplanationArticle($propertyId:ID!,$productTypeId:ID!){
+    propertyExplanationArticle(propertyId:$propertyId,productTypeId:$productTypeId){
+        blocks{
+            ...on IntroductionWithSpecialistBlock{
+                title
+                introduction
+                specialistImage{
+                    ...Image
+                }
+            }
+            ...on PropertyExplanationTextBlock{
+                title
+                content
+            }
+            ...on PropertyExplanationTextImageBlock{
+                title
+                content
+                image{
+                    ...Image
+                }
+            }
+            ...on PropertyExplanationVideoBlock{
+                title
+                youtubeId
+            }
+        }
+    }
+}

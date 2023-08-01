@@ -1,0 +1,14 @@
+query GetCatalogSearch($searchInput:SearchQueryInput!, $hemingwayContent: HemingwayContentInput, $path: String!, $supportedPresentationFormats:[PresentationFormat]!, $postalCode: String) {
+    searchResult(hemingwayContent: $hemingwayContent, searchQueryInput:$searchInput) {
+        ...SearchResultsFragment
+        ...HemingwayArticle
+        ...UpstreamServiceFailed
+    }
+    segmentNavigation(path: $path, supportedPresentationFormats: $supportedPresentationFormats) {
+        children {
+            title
+            path
+            presentationFormat
+        }
+    }
+}

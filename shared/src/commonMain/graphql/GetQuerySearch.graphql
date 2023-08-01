@@ -1,0 +1,7 @@
+query GetQuerySearch($searchInput:SearchQueryInput!, $hemingwayContent: HemingwayContentInput, $postalCode: String) {
+    searchResult(hemingwayContent: $hemingwayContent, searchQueryInput:$searchInput) {
+        ...SearchResultsFragment
+        ...HemingwayArticle
+        ...UpstreamServiceFailed
+    }
+}

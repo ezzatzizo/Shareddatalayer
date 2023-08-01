@@ -1,0 +1,17 @@
+{
+  "name": "GraphQL Schema",
+  "schemaPath": "schema.json",
+  "extensions": {
+    "endpoints": {
+      "GraphQL Acceptance Endpoint": {
+        "url": "https://mobile-api.coolblue-acceptance.eu/graphql",
+        "documents": "https://mobile-api.coolblue-acceptance.eu/graphql",
+        "headers": {
+          "Accept-Language":"nl-NL",
+          "Content-Type": "application/json"
+        },
+        "introspect": false
+      }
+    }
+  }
+}

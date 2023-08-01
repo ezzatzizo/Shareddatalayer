@@ -1,0 +1,61 @@
+fragment Image on Image {
+    cdnUrl(width: 400, height: 400,max: true, transparent: true)}
+
+fragment HighAndLowImage on Image {
+    large:cdnUrl(width: 1024, height: 768, max: true, transparent: true)
+    small:cdnUrl(width: 200, height: 500, max: true, transparent: true)
+}
+
+fragment UpstreamServiceFailed on UpstreamServiceFailed {
+    serviceName
+}
+
+fragment ProductImage on Image {
+    id
+    cdnUrl(width:500, height:500, transparent: true)
+}
+
+fragment OrderSummaryData on OrderSummary {
+    orderId
+    orderDate
+    status
+    isDeliveryTimeElapsed
+    deliveryInformation {
+        deliveryStatus
+        carrier {
+            name
+        }
+        deliveryAddress {
+            city
+            houseNumber
+            houseNumberAddition
+            postalCode
+            street
+        }
+        expectedDeliveryDate {
+            start
+            end
+        }
+        trackAndTraceUrl
+        deliveryDate
+        isCoolblueDelivery
+        shipmentMethod
+    }
+    orderLines {
+        quantity
+        product {
+            id
+            name
+            primaryImage {
+                id
+                ...ProductImage
+            }
+        }
+    }
+    faq {
+       questionAndAnswers {
+           question
+           htmlAnswer
+       }
+    }
+}
